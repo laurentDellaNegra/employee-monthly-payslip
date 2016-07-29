@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <p>
+      <upload-button on-load-employees="$ctrl.loadEmployees(employees)"></upload-button>
+      <button class="btn btn-default" type="button" ng-click="$ctrl.cleanEmployees()">
+        <span class="glyphicon glyphicon-trash"></span>&nbsp;Clean
+      </button>
+    </p>
+  </div>
+  <div class="row">
+    <div ng-show="$ctrl.employeesVM.length" class="table-responsive">
+      <h4>Employees</h4>
+      <table class="table table-bordered table-striped table-hover">
+      	<thead>
+      		<tr>
+            <th>#</th>
+      			<th>First name</th>
+      			<th>Last name</th>
+      			<th>Annual salary</th>
+      			<th>super rate</th>
+      			<th>Start date</th>
+      		</tr>
+      	</thead>
+      	<tbody>
+      		<tr ng-repeat="employee in $ctrl.employeesVM">
+      			<th scope="row">{{$index}}</th>
+      			<td ng-bind="employee.firstName"></td>
+      			<td ng-bind="employee.lastName"></td>
+      			<td ng-bind="employee.annualSalary"></td>
+      			<td ng-bind="employee.superRate"></td>
+      			<td>{{employee.startDate | date:'dd/MM/yyyy'}}</td>
+      		</tr>
+      	</tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div ng-show="$ctrl.payslipsVM.length" class="table-responsive">
+      <h4>Payslips</h4>
+      <table class="table table-bordered table-striped table-hover">
+      	<thead>
+      		<tr>
+            <th>#</th>
+      			<th>Name</th>
+      			<th>Pay period</th>
+            <th>Days worked</th>
+      			<th>Gross income</th>
+      			<th>income tax</th>
+      			<th>Net income</th>
+      			<th>Super</th>
+      		</tr>
+      	</thead>
+      	<tbody>
+      		<tr ng-repeat="payslip in $ctrl.payslipsVM">
+      			<th scope="row">{{$index}}</th>
+      			<td ng-bind="payslip.name"></td>
+      			<td ng-bind="payslip.payPeriod"></td>
+            <td ng-bind="payslip.numberOfworkingDays"></td>
+      			<td ng-bind="payslip.grossIncome"></td>
+      			<td ng-bind="payslip.incomeTax"></td>
+      			<td ng-bind="payslip.netIncome"></td>
+            <td ng-bind="payslip.superA"></td>
+      		</tr>
+      	</tbody>
+      </table>
+    </div>
+  </div>
+</div>

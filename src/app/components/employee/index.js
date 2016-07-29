@@ -1,10 +1,10 @@
 import angular from 'angular';
-import EmployeeFactoryService from './employee-factory.service';
+import EmployeeValidatorService from './employee-validator.service';
 import Constants from '../constants';
 
 const employee = angular
   .module('employee', [Constants])
-  .service('EmployeeFactory', EmployeeFactoryService)
+  .service('EmployeeValidator', EmployeeValidatorService)
   .name;
 
 export default employee;

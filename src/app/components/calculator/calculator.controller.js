@@ -5,13 +5,13 @@ class CalculatorController {
     this.payslipService = PayslipService;
     //Test data
     // employee from the view model
-    this.employeeVM = {
-      firstName: 'Laurent',
-      lastName: 'Della-Negra',
-      annualSalary: 60050,
-      superRate: 9,
-      startDate: new Date('03/01/2016')
-    };
+    // this.employeeVM = {
+    //   firstName: 'Laurent',
+    //   lastName: 'Della-Negra',
+    //   annualSalary: 60050,
+    //   superRate: 9,
+    //   startDate: new Date('03/01/2016')
+    // };
   }
 
   compute() {

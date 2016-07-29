@@ -1,9 +1,9 @@
 
 class PayslipService {
 
-  constructor(PayslipFactory, EmployeeFactory) {
+  constructor(PayslipFactory, EmployeeValidator) {
     this.payslipFactory = PayslipFactory;
-    this.employeeFactory = EmployeeFactory;
+    this.employeeValidator = EmployeeValidator;
   }
 
   getPayslips(employees) {
@@ -16,11 +16,11 @@ class PayslipService {
 
   getPayslip(employeeVM) {
     //validate the employee object
-    const employee = this.employeeFactory.createEmployee(employeeVM);
+    const employee = this.employeeValidator.createEmployee(employeeVM);
     //pass to the payslip factory
     return this.payslipFactory.createPayslip(employee);
   }
 }
-PayslipService.$inject = ['PayslipFactory', 'EmployeeFactory'];
+PayslipService.$inject = ['PayslipFactory', 'EmployeeValidator'];
 
 export default PayslipService;

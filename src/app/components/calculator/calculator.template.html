@@ -2,43 +2,98 @@
   <div class="row">
     <div class="col-md-6">
       <h4>Employee's detail</h4>
-      <form class="form-horizontal well">
-        <div class="form-group">
-          <label for="inputFirstName" class="col-sm-5 control-label">First name</label>
-          <div class="col-sm-5">
-            <input ng-model="$ctrl.employeeVM.firstName" type="text" class="form-control" id="inputFirstName" placeholder="First name...">
+      <form novalidate name="employeeForm" class="well" ng-submit="$ctrl.compute()">
+        <div class="form-group"
+        ng-class="{ 'has-error': employeeForm.firstName.$touched && employeeForm.firstName.$invalid }">
+          <label for="inputFirstName">First name</label>
+          <input
+          id="inputFirstName"
+          name="firstName"
+          class="form-control"
+          type="text"
+          placeholder="First name..."
+          ng-model="$ctrl.employeeVM.firstName"
+          required>
+
+          <div ng-messages="employeeForm.firstName.$error"  ng-show="employeeForm.firstName.$touched">
+            <p ng-message="required">First name is required.</p>
           </div>
         </div>
-        <div class="form-group">
-          <label for="inputLastName" class="col-sm-5 control-label">Last name</label>
-          <div class="col-sm-5">
-            <input ng-model="$ctrl.employeeVM.lastName" type="text" class="form-control" id="inputLastName" placeholder="Last name...">
+
+        <div class="form-group"
+        ng-class="{ 'has-error': employeeForm.lastName.$touched && employeeForm.lastName.$invalid }">
+          <label for="inputLastName">Last name</label>
+          <input
+          ng-model="$ctrl.employeeVM.lastName"
+          name="lastName"
+          type="text"
+          class="form-control"
+          id="inputLastName"
+          placeholder="Last name..."
+          required>
+          <div ng-messages="employeeForm.lastName.$error"  ng-show="employeeForm.lastName.$touched">
+            <p ng-message="required">Last name is required.</p>
           </div>
         </div>
-        <div class="form-group">
-          <label for="inputAnnualSalary" class="col-sm-5 control-label">Annual salary</label>
-          <div class="col-sm-5 input-group">
+        <div class="form-group"
+        ng-class="{ 'has-error': employeeForm.annualSalary.$touched && employeeForm.annualSalary.$invalid }">
+          <label for="inputAnnualSalary">Annual salary</label>
+          <div class="input-group">
             <span class="input-group-addon">$</span>
-            <input ng-model="$ctrl.employeeVM.annualSalary" type="number" class="form-control" id="inputAnnualSalary">
+            <input
+            ng-model="$ctrl.employeeVM.annualSalary"
+            name="annualSalary"
+            type="number"
+            class="form-control"
+            id="inputAnnualSalary"
+            max="9999999999999"
+            min="0"
+            required>
+          </div>
+          <div ng-messages="employeeForm.annualSalary.$error"  ng-show="employeeForm.annualSalary.$touched">
+            <p ng-message="required">Annual salary is required.</p>
+            <p ng-message="min">Annual salary must be a positive number.</p>
+            <p ng-message="max">Are you serious?</p>
           </div>
         </div>
-        <div class="form-group">
-          <label for="inputSuperRate" class="col-sm-5 control-label">Super rate</label>
-          <div class="col-sm-5 input-group">
-            <input ng-model="$ctrl.employeeVM.superRate" type="number" class="form-control" id="inputSuperRate" min="0" max="50">
+        <div class="form-group"
+        ng-class="{ 'has-error': employeeForm.superRate.$touched && employeeForm.superRate.$invalid }">
+          <label for="inputSuperRate">Super rate</label>
+          <div class="input-group">
+            <input
+            ng-model="$ctrl.employeeVM.superRate"
+            name="superRate"
+            type="number"
+            class="form-control"
+            id="inputSuperRate"
+            min="0"
+            max="50"
+            required>
             <span class="input-group-addon">%</span>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="inputStartDate" class="col-sm-5 control-label">Start date</label>
-          <div class="col-sm-5">
-            <input ng-model="$ctrl.employeeVM.startDate" type="date" class="form-control" id="inputStartDate">
+
+          <div ng-messages="employeeForm.superRate.$error"  ng-show="employeeForm.superRate.$touched">
+            <p ng-message="required">Super rate is required.</p>
+            <p ng-message="min">Super rate must be a positive number.</p>
+            <p ng-message="max">Super rate can't be superior than 50%</p>
           </div>
         </div>
+        <div class="form-group"
+        ng-class="{ 'has-error': employeeForm.startDate.$touched && employeeForm.startDate.$invalid }">
+          <label for="inputStartDate">Start date</label>
+          <input
+          ng-model="$ctrl.employeeVM.startDate"
+          type="date"
+          name="startDate"
+          class="form-control"
+          id="inputStartDate"
+          required>
+        </div>
+        <div ng-messages="employeeForm.startDate.$error"  ng-show="employeeForm.startDate.$touched">
+          <p ng-message="required">Start date is required.</p>
+        </div>
         <div class="form-group">
-          <div class="col-sm-offset-5 col-sm-5">
-            <button ng-click="$ctrl.compute()" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-play"></i>&nbsp;Compute</button>
-          </div>
+          <button type="submit" class="btn btn-default" ng-disabled="employeeForm.$invalid"><i class="glyphicon glyphicon-play"></i>&nbsp;Compute</button>
         </div>
       </form>
     </div>

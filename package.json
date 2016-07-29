@@ -21,6 +21,7 @@
   "homepage": "https://github.com/LaurentDellaNegra/employee-monthly-payslip",
   "dependencies": {
     "angular": "^1.5.0",
+    "angular-messages": "^1.5.8",
     "bootstrap": "^3.3.6",
     "imports-loader": "^0.6.5",
     "jquery": "^2.2.4"

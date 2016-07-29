@@ -3,19 +3,20 @@
 import Employee from './employee';
 //import TimePeriod from './employee';
 
-class EmployeeFactory {
+class EmployeeValidator {
 
   constructor(MONTHS_NAME: Array<string>) {
     this.MONTHS_NAME = MONTHS_NAME;
   }
 
-  createEmployee(employeeVM): Employee {
-    const firstName = this.checkFirstName(employeeVM.firstName);
-    const lastName = this.checkLastName(employeeVM.lastName);
-    const annualSalary = this.checkAnnualSalary(employeeVM.annualSalary);
-    const superRate = this.checkSuperRate(employeeVM.superRate);
-    const startDate = this.checkStartDate(employeeVM.startDate);
-    return new Employee(firstName, lastName, annualSalary, superRate, startDate);
+  createEmployee(employeeVM): any {
+    return {
+      firstName: this.checkFirstName(employeeVM.firstName),
+      lastName: this.checkLastName(employeeVM.lastName),
+      annualSalary: this.checkAnnualSalary(employeeVM.annualSalary),
+      superRate: this.checkSuperRate(employeeVM.superRate),
+      startDate: this.checkStartDate(employeeVM.startDate)
+    }
   }
 
   //Other tests can be applied here
@@ -80,6 +81,6 @@ class EmployeeFactory {
   }
 }
 
-EmployeeFactory.$inject = ['MONTHS_NAME']
+EmployeeValidator.$inject = ['MONTHS_NAME']
 
-export default EmployeeFactory;
+export default EmployeeValidator;

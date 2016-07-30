@@ -1,11 +1,12 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-xs-12 col-sm-6 col-md-6">
       <h4>Employee's detail</h4>
       <form novalidate name="employeeForm" class="well" ng-submit="$ctrl.compute()">
-        <div class="form-group"
-        ng-class="{ 'has-error': employeeForm.firstName.$touched && employeeForm.firstName.$invalid }">
-          <label for="inputFirstName">First name</label>
+
+        <div class="form-group  has-feedback"
+        ng-class="{ 'has-error': employeeForm.firstName.$touched && employeeForm.firstName.$invalid, 'has-success': employeeForm.firstName.$touched && employeeForm.firstName.$valid }">
+          <label class="control-label" for="inputFirstName">First name</label>
           <input
           id="inputFirstName"
           name="firstName"
@@ -16,13 +17,15 @@
           required>
 
           <div ng-messages="employeeForm.firstName.$error"  ng-show="employeeForm.firstName.$touched">
-            <p ng-message="required">First name is required.</p>
+            <p class="label label-danger" ng-message="required">First name is required</p>
           </div>
+          <span class="form-control-feedback"
+          ng-class="{ 'glyphicon glyphicon-remove': employeeForm.firstName.$touched && employeeForm.firstName.$invalid, 'glyphicon glyphicon-ok': employeeForm.firstName.$touched && employeeForm.firstName.$valid }"></span>
         </div>
 
-        <div class="form-group"
-        ng-class="{ 'has-error': employeeForm.lastName.$touched && employeeForm.lastName.$invalid }">
-          <label for="inputLastName">Last name</label>
+        <div class="form-group  has-feedback"
+        ng-class="{ 'has-error': employeeForm.lastName.$touched && employeeForm.lastName.$invalid, 'has-success': employeeForm.lastName.$touched && employeeForm.lastName.$valid }">
+          <label class="control-label" for="inputLastName">Last name</label>
           <input
           ng-model="$ctrl.employeeVM.lastName"
           name="lastName"
@@ -32,12 +35,14 @@
           placeholder="Last name..."
           required>
           <div ng-messages="employeeForm.lastName.$error"  ng-show="employeeForm.lastName.$touched">
-            <p ng-message="required">Last name is required.</p>
+            <p class="label label-danger" ng-message="required">Last name is required.</p>
           </div>
+          <span class="form-control-feedback"
+          ng-class="{ 'glyphicon glyphicon-remove': employeeForm.lastName.$touched && employeeForm.lastName.$invalid, 'glyphicon glyphicon-ok': employeeForm.lastName.$touched && employeeForm.lastName.$valid }"></span>
         </div>
-        <div class="form-group"
-        ng-class="{ 'has-error': employeeForm.annualSalary.$touched && employeeForm.annualSalary.$invalid }">
-          <label for="inputAnnualSalary">Annual salary</label>
+        <div class="form-group  has-feedback"
+        ng-class="{ 'has-error': employeeForm.annualSalary.$touched && employeeForm.annualSalary.$invalid, 'has-success': employeeForm.annualSalary.$touched && employeeForm.annualSalary.$valid }">
+          <label class="control-label" for="inputAnnualSalary">Annual salary</label>
           <div class="input-group">
             <span class="input-group-addon">$</span>
             <input
@@ -51,14 +56,17 @@
             required>
           </div>
           <div ng-messages="employeeForm.annualSalary.$error"  ng-show="employeeForm.annualSalary.$touched">
-            <p ng-message="required">Annual salary is required.</p>
-            <p ng-message="min">Annual salary must be a positive number.</p>
-            <p ng-message="max">Are you serious?</p>
+            <p class="label label-danger" ng-message="required">Annual salary is required.</p>
+            <p class="label label-danger" ng-message="min">Annual salary must be a positive number.</p>
+            <p class="label label-danger" ng-message="max">Are you serious?</p>
           </div>
+          <span class="form-control-feedback"
+          ng-class="{ 'glyphicon glyphicon-remove': employeeForm.annualSalary.$touched && employeeForm.annualSalary.$invalid, 'glyphicon glyphicon-ok': employeeForm.annualSalary.$touched && employeeForm.annualSalary.$valid }"></span>
+
         </div>
         <div class="form-group"
-        ng-class="{ 'has-error': employeeForm.superRate.$touched && employeeForm.superRate.$invalid }">
-          <label for="inputSuperRate">Super rate</label>
+        ng-class="{ 'has-error': employeeForm.superRate.$touched && employeeForm.superRate.$invalid, 'has-success': employeeForm.superRate.$touched && employeeForm.superRate.$valid }">
+          <label class="control-label" for="inputSuperRate">Super rate</label>
           <div class="input-group">
             <input
             ng-model="$ctrl.employeeVM.superRate"
@@ -73,14 +81,14 @@
           </div>
 
           <div ng-messages="employeeForm.superRate.$error"  ng-show="employeeForm.superRate.$touched">
-            <p ng-message="required">Super rate is required.</p>
-            <p ng-message="min">Super rate must be a positive number.</p>
-            <p ng-message="max">Super rate can't be superior than 50%</p>
+            <p class="label label-danger" ng-message="required">Super rate is required.</p>
+            <p class="label label-danger" ng-message="min">Super rate must be a positive number.</p>
+            <p class="label label-danger" ng-message="max">Super rate can't be superior than 50%</p>
           </div>
         </div>
-        <div class="form-group"
-        ng-class="{ 'has-error': employeeForm.startDate.$touched && employeeForm.startDate.$invalid }">
-          <label for="inputStartDate">Start date</label>
+        <div class="form-group has-feedback"
+        ng-class="{ 'has-error': employeeForm.startDate.$touched && employeeForm.startDate.$invalid, 'has-success': employeeForm.startDate.$touched && employeeForm.startDate.$valid  }">
+          <label class="control-label" for="inputStartDate">Start date</label>
           <input
           ng-model="$ctrl.employeeVM.startDate"
           type="date"
@@ -88,43 +96,51 @@
           class="form-control"
           id="inputStartDate"
           required>
+          <span class="form-control-feedback"
+          ng-class="{ 'glyphicon glyphicon-remove': employeeForm.startDate.$touched && employeeForm.startDate.$invalid, 'glyphicon glyphicon-ok': employeeForm.startDate.$touched && employeeForm.startDate.$valid }"></span>
+
+          <div ng-messages="employeeForm.startDate.$error"  ng-show="employeeForm.startDate.$touched">
+            <p class="label label-danger" ng-message="required">Start date is required.</p>
+          </div>
         </div>
-        <div ng-messages="employeeForm.startDate.$error"  ng-show="employeeForm.startDate.$touched">
-          <p ng-message="required">Start date is required.</p>
-        </div>
+
         <div class="form-group">
           <button type="submit" class="btn btn-default" ng-disabled="employeeForm.$invalid"><i class="glyphicon glyphicon-play"></i>&nbsp;Compute</button>
         </div>
       </form>
     </div>
-    <div class="col-md-6">
+    <div class="col-xs-12 col-sm-6 col-md-6">
       <div ng-show="$ctrl.payslip">
         <h4>Payslip</h4>
-        <div class="table-responsive">
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Pay Period</th>
-                <th>Days worked</th>
-                <th>Gross Income</th>
-                <th>Income Tax</th>
-                <th>Net Income</th>
-                <th>Super</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td ng-bind="$ctrl.payslip.name"></td>
-                <td ng-bind="$ctrl.payslip.payPeriod"></td>
-                <td ng-bind="$ctrl.payslip.numberOfworkingDays"></td>
-                <td ng-bind="$ctrl.payslip.grossIncome"></td>
-                <td ng-bind="$ctrl.payslip.incomeTax"></td>
-                <td ng-bind="$ctrl.payslip.netIncome"></td>
-                <td ng-bind="$ctrl.payslip.superA"></td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="well">
+          <dl class="dl-horizontal">
+            <dt>Name:</dt>
+            <dd ng-bind="$ctrl.payslip.name"></dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt>Pay Period:</dt>
+            <dd ng-bind="$ctrl.payslip.payPeriod"></dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt>Days worked:</dt>
+            <dd ng-bind="$ctrl.payslip.numberOfworkingDays"></dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt>Gross Income:</dt>
+            <dd ng-bind="$ctrl.payslip.grossIncome"></dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt>Income Tax:</dt>
+            <dd ng-bind="$ctrl.payslip.incomeTax"></dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt>Net Income:</dt>
+            <dd ng-bind="$ctrl.payslip.netIncome"></dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt>Super:</dt>
+            <dd ng-bind="$ctrl.payslip.superA"></dd>
+          </dl>
         </div>
       </div>
     </div>

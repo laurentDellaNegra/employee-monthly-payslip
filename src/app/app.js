@@ -1,4 +1,4 @@
-//angular modules
+//modules importation
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import AppComponent from './app.component';

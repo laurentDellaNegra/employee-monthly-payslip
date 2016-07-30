@@ -1,6 +1,6 @@
-//import CalculatorComponent from './calculator.component';
-
+// config ofthe module is an exported function
 export default function config($stateProvider, $urlRouterProvider) {
+  'ngInject';
   $stateProvider
     .state('calculator', {
       url: '/calculator',
@@ -8,5 +8,3 @@ export default function config($stateProvider, $urlRouterProvider) {
     });
   $urlRouterProvider.otherwise('/');
 }
-
-config.$inject = ['$stateProvider', '$urlRouterProvider'];

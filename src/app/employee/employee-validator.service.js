@@ -1,11 +1,11 @@
 /* @flow */
 // this is a factory responsible to create a valid employee
 import Employee from './employee';
-//import TimePeriod from './employee';
 
 class EmployeeValidator {
 
   constructor(MONTHS_NAME: Array<string>) {
+    'ngInject';
     this.MONTHS_NAME = MONTHS_NAME;
   }
 
@@ -80,7 +80,5 @@ class EmployeeValidator {
     return startDate;
   }
 }
-
-EmployeeValidator.$inject = ['MONTHS_NAME']
 
 export default EmployeeValidator;

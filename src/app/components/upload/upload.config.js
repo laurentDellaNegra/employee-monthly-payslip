@@ -1,6 +1,7 @@
 import UploadComponent from './upload.component';
 
 export default function config($stateProvider, $urlRouterProvider) {
+  'ngInject';
   $stateProvider
     .state('upload', {
       url: '/upload',
@@ -8,5 +9,3 @@ export default function config($stateProvider, $urlRouterProvider) {
     });
   $urlRouterProvider.otherwise('/');
 }
-
-config.$inject = ['$stateProvider', '$urlRouterProvider'];

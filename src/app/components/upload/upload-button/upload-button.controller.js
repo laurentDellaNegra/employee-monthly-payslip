@@ -3,6 +3,7 @@ import angular from 'angular';
 class UploadButtonController {
 
   constructor($element, $filter) {
+    'ngInject';
     this.$element = $element;
     this.$filter = $filter;
 
@@ -22,21 +23,6 @@ class UploadButtonController {
     // return this.formatArray(rawArray);
     return rawArray;
   }
-
-  // formatArray(rawArray) {
-  //   const arr = [];
-  //   for (const item of rawArray) {
-  //     arr.push({
-  //       firstName: item.firstName,
-  //       lastName: item.lastName,
-  //       annualSalary: Number.parseInt(item.annualSalary),
-  //       superRate: Number.parseInt(item.superRate),
-  //       startDate: new Date(item.startDate),
-  //     })
-  //   }
-  //   return arr;
-  // }
 }
-UploadButtonController.$inject = ['$element', '$filter'];
 
 export default UploadButtonController;

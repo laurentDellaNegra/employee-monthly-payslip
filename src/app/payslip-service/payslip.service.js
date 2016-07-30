@@ -2,6 +2,7 @@
 class PayslipService {
 
   constructor(PayslipFactory, EmployeeValidator) {
+    'ngInject';
     this.payslipFactory = PayslipFactory;
     this.employeeValidator = EmployeeValidator;
   }
@@ -21,6 +22,5 @@ class PayslipService {
     return this.payslipFactory.createPayslip(employee);
   }
 }
-PayslipService.$inject = ['PayslipFactory', 'EmployeeValidator'];
 
 export default PayslipService;

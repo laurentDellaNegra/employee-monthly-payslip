@@ -2,6 +2,7 @@ import angular from 'angular';
 
 class UploadController {
   constructor($timeout, PayslipService) {
+    'ngInject';
     this.$timeout = $timeout;
     this.payslipService = PayslipService;
   }
@@ -21,7 +22,5 @@ class UploadController {
     $('#inputFile').val(null);
   }
 }
-
-UploadController.$inject = ['$timeout', 'PayslipService'];
 
 export default UploadController;

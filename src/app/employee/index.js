@@ -1,6 +1,6 @@
 import angular from 'angular';
 import EmployeeValidatorService from './employee-validator.service';
-import Constants from '../constants';
+import Constants from 'src/app/constants';
 
 const employee = angular
   .module('employee', [Constants])

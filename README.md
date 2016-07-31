@@ -31,7 +31,7 @@ This application is built in a modular way. For this we use components helper in
 ```bash
 -app
   -common -> contains all common component like navbar, footer, etc
-  -components -> all specific components which can\'t be used in several views
+  -components -> all specific components which can't be used in several views
   -employee -> employee model, factory, validator, etc.
   -payslip -> payslip model
   -services -> common services

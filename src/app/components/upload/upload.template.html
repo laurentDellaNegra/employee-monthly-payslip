@@ -8,6 +8,7 @@
     </p>
   </div>
   <div class="row">
+    <div ng-if="$ctrl.status.isValid" class="alert alert-danger" ng-bind="$ctrl.status.message"></div>
     <div ng-show="$ctrl.employeesVM.length" class="table-responsive">
       <h4>Employees</h4>
       <table class="table table-bordered table-striped table-hover">
@@ -43,7 +44,6 @@
             <th>#</th>
       			<th>Name</th>
       			<th>Pay period</th>
-            <th>Days worked</th>
       			<th>Gross income</th>
       			<th>income tax</th>
       			<th>Net income</th>
@@ -55,7 +55,6 @@
       			<th scope="row">{{$index}}</th>
       			<td ng-bind="payslip.name"></td>
       			<td ng-bind="payslip.payPeriod"></td>
-            <td ng-bind="payslip.numberOfworkingDays"></td>
       			<td ng-bind="payslip.grossIncome"></td>
       			<td ng-bind="payslip.incomeTax"></td>
       			<td ng-bind="payslip.netIncome"></td>

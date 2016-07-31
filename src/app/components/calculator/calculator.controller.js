@@ -1,10 +1,22 @@
+// modules import
 import angular from 'angular';
 
+/**
+ * Calculator controller
+ */
 class CalculatorController {
-  
-  constructor(PayslipService) {
+
+  /**
+   * Calculator controller constructor
+   * @param PayslipService  service called when you compute employee's data
+   */
+  constructor(PayslipService, TimeService) {
+
+    //dependency injection with ngAnnotate
     'ngInject';
     this.payslipService = PayslipService;
+    this.timeService = TimeService;
+
     //Test data
     // employee from the view model
     this.employeeVM = {
@@ -16,8 +28,18 @@ class CalculatorController {
     };
   }
 
+  /**
+   * Launch the computation
+   * @return void Update the view model payslip
+   */
   compute() {
-    this.payslip = this.payslipService.getPayslip(this.employeeVM);
+    // we create acopy ofthe object model before sending
+    const employeeCopy = angular.copy(this.employeeVM);
+    // we convert the date into a string of type "01 March – 31 March"
+    employeeCopy.startDate = this.timeService.convertDateToString(this.employeeVM.startDate);
+    const payslip = this.payslipService.getPayslip(employeeCopy);
+    this.status = payslip.status;
+    this.payslipVM = payslip.data;
   }
 }
 

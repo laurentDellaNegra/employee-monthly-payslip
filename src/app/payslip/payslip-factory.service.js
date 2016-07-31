@@ -1,48 +1,54 @@
-import TimePeriod from './time-period';
+/* @flow */
+// import
+import Employee from 'src/app/employee/employee';
 import Payslip from './payslip';
 
-class PayslipService {
+/**
+ * Factory responsible to create a payslip
+ */
+class PayslipFactory {
 
-  constructor() {
-
-    this.taxTable = [
-      { min:0, max:18200, base:0, tax:0 },
-      { min:18201, max:37000, base:0, tax:0.19 },
-      { min:37001, max:80000, base: 3572, tax: 0.325 },
-      { min:80001, max:180000, base: 17545, tax: 0.37 },
-      { min:180001, max:999999999999, base: 54547, tax: 0.45 }
-    ];
+  constructor(TAX_TABLE: Array<T>, TimeService: any) {
+    'ngInject';
+    this.taxTable = TAX_TABLE;
+    this.timeService = TimeService;
   }
 
-  createPayslip(employee) {
+  /**
+   * Create a valid Payslip
+   * @param  {Employee}
+   * @return {Payslip}
+   */
+  createPayslip(employee: Employee): Payslip {
 
-    const timePeriod = new TimePeriod(employee.startDate);
+    const name = this.createName(employee.firstName, employee.lastName);
+    const date = this.timeService.convertStringToDate(employee.startDate);
+    const payPeriod = this.createPayPeriod(employee.startDate);
+    const grossIncome = this.createGrossIncome(employee.annualSalary, date);
+    const incomeTax = this.createIncomeTax(employee.annualSalary);
+    const netIncome = this.createNetIncome(grossIncome, incomeTax);
+    const superA = this.createSuperA(grossIncome, employee.superRate);
 
-    const name = this.computeName(employee.firstName, employee.lastName);
-    const payPeriod = timePeriod.payPeriod;
-    const numberOfworkingDays = timePeriod.numberOfworkingDays;
-    const grossIncome = this.computeGrossIncome(employee.annualSalary, timePeriod);
-    const incomeTax = this.computeIncomeTax(employee.annualSalary);
-    const netIncome = this.computeNetIncome(grossIncome, incomeTax);
-    const superA = this.computeSuperA(grossIncome, employee.superRate);
-
-
-    return new Payslip(name, payPeriod, numberOfworkingDays, grossIncome, incomeTax, netIncome, superA);
+    return new Payslip(name, payPeriod, grossIncome, incomeTax, netIncome, superA);
   }
 
-  computeName(firstName, name) {
-    //TODO use es6 string
-    return firstName + ' ' + name;
+  createName(firstName: string, name: string): string {
+    return `${firstName} ${name}`;
   }
 
-  computeGrossIncome(annualSalary, timePeriod) {
+  createPayPeriod(startDate: string): string {
+    return startDate;
+  }
+
+  createGrossIncome(annualSalary: number, startDate: string): number {
     const monthSalary = (annualSalary / 12);
-    const numberOfDaysInThisMonth = timePeriod.numberOfDays;
+    const numberOfDaysInThisMonth = this.timeService.getNumberOfDaysInMonthFromDate(startDate);
     const daySalaryInThisMonth = monthSalary / numberOfDaysInThisMonth;
-    return Math.round(daySalaryInThisMonth * timePeriod.numberOfworkingDays);
+    const numberOfworkingDays = this.timeService.getNumberOfworkingDays(numberOfDaysInThisMonth, startDate);
+    return Math.round(daySalaryInThisMonth * numberOfworkingDays);
   }
 
-  computeIncomeTax(annualSalary) {
+  createIncomeTax(annualSalary: number): number {
     var incomeTax = 0;
     for (const taxItem of this.taxTable) {
       if(taxItem.min < annualSalary && annualSalary <= taxItem.max  ){
@@ -52,15 +58,14 @@ class PayslipService {
     return Math.round(incomeTax);
   }
 
-  computeNetIncome(grossIncome, incomeTax){
+  createNetIncome(grossIncome: number, incomeTax: number): number{
     return grossIncome - incomeTax;
   }
 
-  computeSuperA(grossIncome, superRate) {
+  createSuperA(grossIncome: number, superRate: number): number {
     return Math.round(grossIncome * (superRate / 100));
   }
 }
 
-// PayslipFactory.$inject = [''];
-
-export default PayslipService;
+// export
+export default PayslipFactory;

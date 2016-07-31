@@ -110,36 +110,33 @@
       </form>
     </div>
     <div class="col-xs-12 col-sm-6 col-md-6">
-      <div ng-show="$ctrl.payslip">
+      <div ng-if="$ctrl.status.isValid === false" class="alert alert-danger" ng-bind="$ctrl.status.message"></div>
+      <div ng-show="$ctrl.payslipVM && $ctrl.status.isValid">
         <h4>Payslip</h4>
         <div class="well">
           <dl class="dl-horizontal">
             <dt>Name:</dt>
-            <dd ng-bind="$ctrl.payslip.name"></dd>
+            <dd ng-bind="$ctrl.payslipVM.name"></dd>
           </dl>
           <dl class="dl-horizontal">
             <dt>Pay Period:</dt>
-            <dd ng-bind="$ctrl.payslip.payPeriod"></dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt>Days worked:</dt>
-            <dd ng-bind="$ctrl.payslip.numberOfworkingDays"></dd>
+            <dd ng-bind="$ctrl.payslipVM.payPeriod"></dd>
           </dl>
           <dl class="dl-horizontal">
             <dt>Gross Income:</dt>
-            <dd ng-bind="$ctrl.payslip.grossIncome"></dd>
+            <dd ng-bind="$ctrl.payslipVM.grossIncome"></dd>
           </dl>
           <dl class="dl-horizontal">
             <dt>Income Tax:</dt>
-            <dd ng-bind="$ctrl.payslip.incomeTax"></dd>
+            <dd ng-bind="$ctrl.payslipVM.incomeTax"></dd>
           </dl>
           <dl class="dl-horizontal">
             <dt>Net Income:</dt>
-            <dd ng-bind="$ctrl.payslip.netIncome"></dd>
+            <dd ng-bind="$ctrl.payslipVM.netIncome"></dd>
           </dl>
           <dl class="dl-horizontal">
             <dt>Super:</dt>
-            <dd ng-bind="$ctrl.payslip.superA"></dd>
+            <dd ng-bind="$ctrl.payslipVM.superA"></dd>
           </dl>
         </div>
       </div>

@@ -1,11 +1,12 @@
-//import modules
+// modules import
 import controller from './calculator.controller';
 import calculatorTemplate from './calculator.template.html';
 
-// Calculator compponent
+// calculator component
 const CalculatorComponent = {
   controller,
   template: calculatorTemplate,
 };
 
+// export
 export default CalculatorComponent;

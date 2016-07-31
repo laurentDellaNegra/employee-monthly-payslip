@@ -1,83 +1,69 @@
 /* @flow */
-// this is a factory responsible to create a valid employee
+//  modules import
 import Employee from './employee';
 
+/**
+ * this is a validator responsible to validate an employee
+ * We use FLow to type this javascript code and reduce tests
+ */
 class EmployeeValidator {
 
-  constructor(MONTHS_NAME: Array<string>) {
+  constructor(TimeService) {
     'ngInject';
-    this.MONTHS_NAME = MONTHS_NAME;
+    this.timeService = TimeService;
   }
 
-  createEmployee(employeeVM): any {
-    return {
-      firstName: this.checkFirstName(employeeVM.firstName),
-      lastName: this.checkLastName(employeeVM.lastName),
-      annualSalary: this.checkAnnualSalary(employeeVM.annualSalary),
-      superRate: this.checkSuperRate(employeeVM.superRate),
-      startDate: this.checkStartDate(employeeVM.startDate)
+  checkEmployee(employee: any): any {
+    const employeeIsOk = {
+      firstNameIsOk: this.checkFirstName(employee.firstName),
+      lastNameIsOk: this.checkLastName(employee.lastName),
+      annualSalaryIsOk: this.checkAnnualSalary(employee.annualSalary),
+      superRateIsOk: this.checkSuperRate(employee.superRate),
+      startDateIsOk: this.checkStartDate(employee.startDate),
     }
+    return this.createValidationStatus(employee, employeeIsOk);
+  }
+
+  createValidationStatus(employee, employeeIsOk) {
+    let validationStatus = { isValid: true, message: '' };
+    // we can create custom message, but we will do simple
+    for (let memberIsOK in employeeIsOk) {
+      if (!employeeIsOk[memberIsOK]) {
+        validationStatus.isValid = false;
+        validationStatus.message = `Error, employee is not valid`;
+        break;
+      }
+    }
+    return validationStatus;
   }
 
   //Other tests can be applied here
-  checkFirstName(firstNameVM: string = '') {
-    return firstNameVM.trim();
+  checkFirstName(firstName: string) {
+    return (firstName === '') ? false : true;
   }
 
-  checkLastName(lastNameVM: string = '') {
-    return lastNameVM.trim();
+  checkLastName(lastName: string = '') {
+    return (lastName === '') ? false : true;
   }
 
-  // Can be string or number
-  checkAnnualSalary(annualSalaryVM: string | number = 0) {
-    let annualSalary = 0;
-    // Check type and convert
-    if (typeof annualSalaryVM === 'string') {
-      annualSalary = Number.parseInt(annualSalaryVM)
-    } else if (typeof annualSalaryVM === 'number') {
-        annualSalary = annualSalaryVM;
-    }
-    // Check business logic
+  checkAnnualSalary(annualSalary: number) {
+    let isOk = true;
     if (annualSalary < 0 || annualSalary > 9999999999999) {
-      annualSalary = 0;
+      isOk = false;
     }
-    return annualSalary;
+    return isOk;
   }
 
-  checkSuperRate(superRateVM: string | number = 0) {
-    let superRate = 0;
-    // Check type and convert
-    if (typeof superRateVM === 'string') {
-      superRate = Number.parseInt(superRateVM.replace('%', '').trim()); //remove percentage, trim and convert
-    } else if (typeof superRateVM === 'number') {
-      superRate = superRateVM;
-    }
-    // Check business logic
+  checkSuperRate(superRate: number) {
+    let isOk = true;
     if (superRate < 0 || superRate > 50) {
-      superRate = 0;
+      isOk = false;
     }
-    return superRate;
+    return isOk;
   }
 
-  checkStartDate(startDateVM: any = new Date()) {
-    let startDate = new Date();
-    if (typeof startDateVM === "string") {
-      // test if format is '01 March – 31 March';
-      const regex = /^([0-9]+)\s(\w+)\s.\s([0-9]+)\s(\w+)$/;
-      let startDateVMTrimed = startDateVM.trim();
-      if (regex.test(startDateVMTrimed)) {
-        const arr = regex.exec(startDateVMTrimed);
-        const day = arr[1];
-        const month = arr[2];
-        // We only need the first day and month
-        startDate = new Date(startDate.getFullYear(), this.MONTHS_NAME.indexOf(month), day);
-      } else {
-        startDate = startDateVM;
-      }
-    } else {
-      startDate = startDateVM;
-    }
-    return startDate;
+  checkStartDate(startDate: any) {
+    return this.timeService.isGoodFormat(startDate);
   }
 }
 

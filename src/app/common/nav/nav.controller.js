@@ -10,12 +10,14 @@ class NavController {
    * @param $location angular url service
    */
   constructor($location) {
+    //dependency injection with ngAnnotate
+    'ngInject';
     this.$location = $location;
   }
 
   /**
    * Highlight the selected menu
-   * @param path: string
+   * @param path: string current url
    * @return string      active or empty string
    */
   getClass (path: string) {
@@ -23,6 +25,5 @@ class NavController {
   }
 }
 
-NavController.$inject = ['$location'];
-
+// export
 export default NavController;

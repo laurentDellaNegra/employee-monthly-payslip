@@ -10,8 +10,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap';
 
 //custom style
-import '../style/app.css';
+import 'src/style/app.css';
 
+// root module
 const root = angular
   .module('app', [
     Components,

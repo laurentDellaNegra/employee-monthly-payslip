@@ -11,7 +11,6 @@ class CalculatorController {
    * @param PayslipService  service called when you compute employee's data
    */
   constructor(PayslipService, TimeService) {
-
     //dependency injection with ngAnnotate
     'ngInject';
     this.payslipService = PayslipService;

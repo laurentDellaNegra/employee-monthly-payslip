@@ -1,0 +1,25 @@
+<div class="table-responsive">
+  <h4>Employees</h4>
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Annual salary</th>
+        <th>super rate</th>
+        <th>Start date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="employee in $ctrl.employees">
+        <th scope="row">{{$index}}</th>
+        <td ng-bind="employee.firstName"></td>
+        <td ng-bind="employee.lastName"></td>
+        <td ng-bind="employee.annualSalary"></td>
+        <td ng-bind="employee.superRate"></td>
+        <td>{{employee.startDate | date:'dd/MM/yyyy'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

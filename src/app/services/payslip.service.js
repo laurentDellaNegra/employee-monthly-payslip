@@ -26,7 +26,10 @@ class PayslipService {
     for(const employeeVM of employeesVM) {
       const employee = this.getPayslip(employeeVM);
       payslips.statusArray.push(employee.status);
-      payslips.dataArray.push(employee.data);
+      //we push only the good results
+      if (employee.status.isValid) {
+        payslips.dataArray.push(employee.data);
+      }
     }
     return payslips;
   }

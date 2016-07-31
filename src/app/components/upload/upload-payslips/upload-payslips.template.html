@@ -1,0 +1,27 @@
+<div class="table-responsive">
+  <h4>Payslips</h4>
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Pay period</th>
+        <th>Gross income</th>
+        <th>income tax</th>
+        <th>Net income</th>
+        <th>Super</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="payslip in $ctrl.payslips">
+        <th scope="row">{{$index}}</th>
+        <td ng-bind="payslip.name"></td>
+        <td ng-bind="payslip.payPeriod"></td>
+        <td ng-bind="payslip.grossIncome"></td>
+        <td ng-bind="payslip.incomeTax"></td>
+        <td ng-bind="payslip.netIncome"></td>
+        <td ng-bind="payslip.superA"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

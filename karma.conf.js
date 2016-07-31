@@ -1,21 +1,17 @@
 module.exports = function karmaConfig (config) {
   config.set({
-    frameworks: [
-      // Set framework to jasmine
-      'jasmine'
-    ],
+    frameworks: ['jasmine'],
 
     reporters: [
       // Set reporter to print detailed results to console
       'progress',
-
       // Output code coverage files
       'coverage'
     ],
 
     files: [
       // Grab all files in the app folder that contain .spec.
-      'src/tests.webpack.js'
+      { pattern: 'src/tests.webpack.js', watched: false }
     ],
 
     preprocessors: {

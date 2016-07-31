@@ -42,6 +42,7 @@ This application is built in a modular way. For this we use components helper in
 * webpack
 * es6/es2015
 * karma & jasmine
+* flow for typing js
 
 ## Quick start
 

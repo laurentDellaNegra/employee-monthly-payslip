@@ -30,12 +30,12 @@ class UploadController {
   }
 
   createStatus(statusArray) {
-    let s = { isValid: true, message: '' };
+    let s = { isValid: true, message: 'Error, employee is not valid in lines' };
     // we can create custom message, but we will do simple
-    for (const status of statusArray) {
-      if (!status.isValid) {
+    for (let i = 0; i < statusArray.length; i++) {
+      if (!statusArray[i].isValid) {
         s.isValid = false;
-        s.message.concat(`Error employee is not valid: ${employee}\n`);
+        s.message += ` ${i};`;
       }
     }
     return s;
@@ -47,6 +47,7 @@ class UploadController {
   cleanEmployees() {
     this.employeesVM = [];
     this.payslipsVM = [];
+    this.status = {isValid: true, message: ''};
     //Clean file uploaded button
     $('#inputFile').val(null);
   }

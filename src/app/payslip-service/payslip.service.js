@@ -9,10 +9,11 @@ class PayslipService {
    * @param  {[type]} EmployeeValidator [description]
    * @return {[type]}                   [description]
    */
-  constructor(PayslipFactory, EmployeeValidator) {
+  constructor(PayslipFactory, EmployeeFactory, EmployeeValidator) {
     'ngInject';
     this.payslipFactory = PayslipFactory;
     this.employeeValidator = EmployeeValidator;
+    this.employeeFactory = EmployeeFactory;
   }
 
   /**
@@ -43,9 +44,10 @@ class PayslipService {
       data: {}
     }
 
-    // if employee is valid, we create the employee
+    // if employee is valid, we create the employee and the payslip
     if (payslip.status.isValid) {
-      payslip.data = this.payslipFactory.createPayslip(employeeVM);
+      const employee = this.employeeFactory.createEmployee(employeeVM);
+      payslip.data = this.payslipFactory.createPayslip(employee);
     }
 
     //pass to the payslip factory

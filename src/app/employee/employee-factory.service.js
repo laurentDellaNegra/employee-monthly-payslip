@@ -52,7 +52,7 @@ class EmployeeFactory {
       //remove percentage if exist, trim and convert
       sr = Number.parseInt(superRate.replace('%', '').trim());
     } else {
-      sr = superRateVM;
+      sr = superRate;
     }
     return sr;
   }
@@ -62,4 +62,4 @@ class EmployeeFactory {
   }
 }
 
-export default EmployeeValidator;
+export default EmployeeFactory;

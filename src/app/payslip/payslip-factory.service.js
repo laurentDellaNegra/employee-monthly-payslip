@@ -22,9 +22,8 @@ class PayslipFactory {
   createPayslip(employee: Employee): Payslip {
 
     const name = this.createName(employee.firstName, employee.lastName);
-    const date = this.timeService.convertStringToDate(employee.startDate);
     const payPeriod = this.createPayPeriod(employee.startDate);
-    const grossIncome = this.createGrossIncome(employee.annualSalary, date);
+    const grossIncome = this.createGrossIncome(employee.annualSalary, employee.startDate);
     const incomeTax = this.createIncomeTax(employee.annualSalary);
     const netIncome = this.createNetIncome(grossIncome, incomeTax);
     const superA = this.createSuperA(grossIncome, employee.superRate);
@@ -36,8 +35,8 @@ class PayslipFactory {
     return `${firstName} ${name}`;
   }
 
-  createPayPeriod(startDate: string): string {
-    return startDate;
+  createPayPeriod(startDate: any): string {
+    return this.timeService.convertDateToString(startDate);
   }
 
   createGrossIncome(annualSalary: number, startDate: string): number {

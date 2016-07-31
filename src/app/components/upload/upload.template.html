@@ -8,7 +8,6 @@
     </p>
   </div>
   <div class="row">
-    <div ng-if="$ctrl.status.isValid" class="alert alert-danger" ng-bind="$ctrl.status.message"></div>
     <div ng-show="$ctrl.employeesVM.length" class="table-responsive">
       <h4>Employees</h4>
       <table class="table table-bordered table-striped table-hover">
@@ -36,7 +35,8 @@
     </div>
   </div>
   <div class="row">
-    <div ng-show="$ctrl.payslipsVM.length" class="table-responsive">
+    <div ng-if="$ctrl.status.isValid === false" class="alert alert-danger" ng-bind="$ctrl.status.message"></div>
+    <div ng-show="$ctrl.payslipsVM.length && $ctrl.status.isValid" class="table-responsive">
       <h4>Payslips</h4>
       <table class="table table-bordered table-striped table-hover">
       	<thead>

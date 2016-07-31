@@ -38,7 +38,7 @@ class TimeService {
   }
 
   isGoodFormat(date: string): boolean {
-    return this.regex.test(date);
+    return this.regex.test(date.trim());
   }
 
   /**

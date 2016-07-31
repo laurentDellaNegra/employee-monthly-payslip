@@ -28,12 +28,14 @@ if the file have lines errors, the line is omitted but the rest of the file is a
 
 This application is built in a modular way. For this we use components helper include in Angular 1.5 and the structure is :
 
+```bash
 -app
   -common -> contains all common component like navbar, footer, etc
-  -components -> all specific components which can't be used in several views
+  -components -> all specific components which can\'t be used in several views
   -employee -> employee model, factory, validator, etc.
   -payslip -> payslip model
   -services -> common services
+```
 
 ## Built with
 

@@ -5,11 +5,12 @@ import angular from 'angular';
  * Upload controller
  */
 class UploadController {
-  constructor($timeout, PayslipService) {
+  constructor($timeout, PayslipService, $q) {
     // ngAnnotate
     'ngInject';
     this.$timeout = $timeout;
     this.payslipService = PayslipService;
+    this.$q = $q;
   }
 
   /**
@@ -18,15 +19,33 @@ class UploadController {
    * @return void               update the view model
    */
   loadEmployees(employees) {
-    // Check if we are in the digest loop
-    // Can be replaced by $digest
-    this.$timeout(() => {
+
+      // assigning to employees table
       this.employeesVM = employees;
 
-      const payslips = this.payslipService.getPayslips(employees);
-      this.status = this.createStatus(payslips.statusArray);
-      this.payslipsVM = payslips.dataArray;
-    });
+      // async computation
+      const promise = this.getPayslipsAsync(employees).then((payslips) => {
+        this.status = this.createStatus(payslips.statusArray);
+        this.payslipsVM = payslips.dataArray;
+        //TODO don't use jquery
+        $('#spin').html('Browse...');
+      }, (reason) => {
+        alert('Failed: ' + reason);
+        //TODO don't use jquery
+        $('#spin').html('Browse...');
+      });
+  }
+
+  getPayslipsAsync(employees) {
+
+    var deferred = this.$q.defer();
+    const payslips = this.payslipService.getPayslips(employees);
+    if (payslips) {
+      deferred.resolve(payslips);
+    } else {
+      deferred.reject('Error in computation');
+    }
+    return deferred.promise;
   }
 
   createStatus(statusArray) {
@@ -44,7 +63,7 @@ class UploadController {
   /**
    * Reset view model
    */
-  cleanEmployees() {
+  clean() {
     this.employeesVM = [];
     this.payslipsVM = [];
     this.status = {isValid: true, message: ''};

@@ -6,12 +6,21 @@ import CalculatorComponent from './calculator.component';
 import config from './calculator.config';
 import PayslipService from 'src/app/payslip-service';
 import services from 'src/app/services';
+import CalculatorPayslipComponent from './calculator-payslip';
+import CalculatorEmployeeComponent from './calculator-employee';
 
 /**
  * View Calculator
  */
 const calculator = angular
-  .module('calculator', [uiRouter, ngMessages, PayslipService, services])
+  .module('calculator', [
+    uiRouter,
+    ngMessages,
+    PayslipService,
+    services,
+    CalculatorPayslipComponent,
+    CalculatorEmployeeComponent
+  ])
   .component('calculator', CalculatorComponent)
   .config(config)
   .name;

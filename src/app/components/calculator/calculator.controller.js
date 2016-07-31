@@ -16,28 +16,20 @@ class CalculatorController {
     'ngInject';
     this.payslipService = PayslipService;
     this.timeService = TimeService;
-
-    //Test data
-    // employee from the view model
-    this.employeeVM = {
-      firstName: 'Laurent',
-      lastName: 'Della-Negra',
-      annualSalary: 60050,
-      superRate: 9,
-      startDate: new Date('03/01/2016')
-    };
   }
 
   /**
    * Launch the computation
    * @return void Update the view model payslip
    */
-  compute() {
-    // we create acopy ofthe object model before sending
-    const employeeCopy = angular.copy(this.employeeVM);
+  compute(employeeVM) {
+    // we create a copy of the object model before send it
+    const employeeCopy = angular.copy(employeeVM);
     // we convert the date into a string of type "01 March – 31 March"
-    employeeCopy.startDate = this.timeService.convertDateToString(this.employeeVM.startDate);
+    employeeCopy.startDate = this.timeService.convertDateToString(employeeVM.startDate);
+    // we launch the computation
     const payslip = this.payslipService.getPayslip(employeeCopy);
+    // refresh view model
     this.status = payslip.status;
     this.payslipVM = payslip.data;
   }

@@ -7,6 +7,4 @@ const CalculatorComponent = {
   controller,
   template: calculatorTemplate,
 };
-
-// export
 export default CalculatorComponent;

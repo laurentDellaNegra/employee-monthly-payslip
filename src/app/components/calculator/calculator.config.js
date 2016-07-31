@@ -5,7 +5,7 @@
  * @return void
  */
 export default function config($stateProvider, $urlRouterProvider) {
-  //dependency injection with ngAnnotate
+  //ngAnnotate
   'ngInject';
   $stateProvider
     .state('calculator', {
